@@ -2,7 +2,7 @@
 
 ## T1
 
-Para rodar o trabalho são necessários seguir os passos de "clone", "build" e "run", descritos abaixo.
+Para rodar o trabalho são necessários seguir os passos de "clone", "build" e "run", descritos abaixo. É válido ressaltar que é necessário que os comandos sejam utilizados dentro de um ambiente Linux.
 
 ### Clone
 

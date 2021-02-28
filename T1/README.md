@@ -1,5 +1,9 @@
 # Compiladores
 
+Alunos:
+- Alcides Mignoso e Silva - 760479
+- Matheus Victorello      - 758606
+
 ## T1
 
 Para rodar o trabalho são necessários seguir os passos de "clone", "build" e "run", descritos abaixo. É válido ressaltar que é necessário que os comandos sejam utilizados dentro de um ambiente Linux.
@@ -54,7 +58,7 @@ Resultado verificado
 
 
 ==================================
-Nota do grupo "760479,758606,760650":
+Nota do grupo "760479,758606":
 CT Léxico = 10.0 (37/37)
 CT Sintático = 0.0 (0/0)
 CT Semântico = 0.0 (0/0)

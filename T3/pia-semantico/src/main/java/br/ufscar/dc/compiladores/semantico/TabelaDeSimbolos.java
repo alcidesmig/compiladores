@@ -1,6 +1,8 @@
 package br.ufscar.dc.compiladores.semantico;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TabelaDeSimbolos {
@@ -11,18 +13,23 @@ public class TabelaDeSimbolos {
         REAL,
         LOGICO,
         INVALIDO,
-        PONTEIRO,
-        STRUCT
+        PONTEIRO_INTEIRO,
+        PONTEIRO_LITERAL,
+        PONTEIRO_REAL,
+        PONTEIRO_LOGICO,
+        REGISTRO,
+        TIPO
     }
 
     public enum TipoEntradaTds {
         TIPO,
         FUNCAO,
         PROCEDIMENTO,
-        VARIAVEL
+        VARIAVEL,
+        REGISTRO
     }
 
-    private final Map<String, EntradaTabelaDeSimbolos> tabela;
+    public final Map<String, EntradaTabelaDeSimbolos> tabela;
 
     public TabelaDeSimbolos() {
         this.tabela = new HashMap<>();
@@ -30,6 +37,10 @@ public class TabelaDeSimbolos {
 
     public void adicionar(String nome, TipoEntradaTds tipoEntrada, TipoVariavel tipoObjeto) {
         tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipoEntrada, tipoObjeto));
+    }
+
+    public void adicionar(String nome, TipoEntradaTds tipoEntrada, TipoVariavel tipoObjeto, List<TabelaDeSimbolos.TipoVariavel> tiposFuncao) {
+        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipoEntrada, tipoObjeto, tiposFuncao));
     }
 
     public void adicionar(String nome, EntradaTabelaDeSimbolos etd) {

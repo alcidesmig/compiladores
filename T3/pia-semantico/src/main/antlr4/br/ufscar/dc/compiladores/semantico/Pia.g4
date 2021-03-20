@@ -285,7 +285,7 @@ parcela_unario
         |   IDENT '(' expressao (',' expressao)* ')'
         |   NUM_INT
         |   NUM_REAL
-        | '(' expressao ')'
+        | '(' expNaoParametro=expressao ')'
         ;
 
 parcela_nao_unario
@@ -306,11 +306,11 @@ op_relacional
         ;
 
 expressao
-        :   termo_logico (op_logico_1 termo_logico)*
+        :   termoList+=termo_logico (op_logico_1 termoList+=termo_logico)*
         ;
 
 termo_logico
-        :   fator_logico (op_logico_2 termo_logico)*
+        :   fator_logico (op_logico_2 fator_logico)*
         ;
 
 fator_logico

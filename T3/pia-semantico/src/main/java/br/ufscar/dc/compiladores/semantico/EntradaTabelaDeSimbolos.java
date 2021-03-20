@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufscar.dc.compiladores.semantico;
+
+import java.util.List;
 
 public class EntradaTabelaDeSimbolos {
 
     String nome;
     TabelaDeSimbolos.TipoEntradaTds tipoEntrada;
     TabelaDeSimbolos.TipoVariavel tipoObjeto;
-
+    List<TabelaDeSimbolos.TipoVariavel> tiposFuncao;
     TabelaDeSimbolos subTabela;
 
     public EntradaTabelaDeSimbolos(String nome, TabelaDeSimbolos.TipoEntradaTds tipoEntrada, TabelaDeSimbolos.TipoVariavel tipoObjeto) {
@@ -18,11 +15,17 @@ public class EntradaTabelaDeSimbolos {
         this.tipoEntrada = tipoEntrada;
         this.tipoObjeto = tipoObjeto;
     }
-
-    public EntradaTabelaDeSimbolos(String nome, TabelaDeSimbolos.TipoEntradaTds tipoEntrada, TabelaDeSimbolos subTabela) {
+    
+    public EntradaTabelaDeSimbolos(String nome, TabelaDeSimbolos.TipoEntradaTds tipoEntrada, TabelaDeSimbolos.TipoVariavel tipoObjeto, List<TabelaDeSimbolos.TipoVariavel> tiposFuncao) {
         this.nome = nome;
         this.tipoEntrada = tipoEntrada;
-        this.subTabela = new TabelaDeSimbolos();
+        this.tipoObjeto = tipoObjeto;
+        this.tiposFuncao = tiposFuncao;
+    }
+
+    public EntradaTabelaDeSimbolos(TabelaDeSimbolos.TipoEntradaTds tipoEntrada, TabelaDeSimbolos subTabela) {
+        this.tipoEntrada = tipoEntrada;
+        this.subTabela = subTabela;
     }
 
 }

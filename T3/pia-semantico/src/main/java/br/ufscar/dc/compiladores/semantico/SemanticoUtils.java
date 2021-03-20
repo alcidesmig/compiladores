@@ -19,20 +19,36 @@ public class SemanticoUtils {
         errosSemanticos.add(String.format("Linha %d: %s", linha, mensagem));
     }
 
-    public static TabelaDeSimbolos.TipoVariavel verificarTipo(String strTipoVar) {
+    public static TabelaDeSimbolos.TipoVariavel verificarTipo(String strTipoVar, boolean isPointer) {
         TabelaDeSimbolos.TipoVariavel tipoVar = TipoVariavel.INVALIDO;
         switch (strTipoVar) {
             case "literal":
-                tipoVar = TipoVariavel.LITERAL;
+                if (isPointer) {
+                    tipoVar = TipoVariavel.PONTEIRO_LITERAL;
+                } else {
+                    tipoVar = TipoVariavel.LITERAL;
+                }
                 break;
             case "inteiro":
-                tipoVar = TipoVariavel.INTEIRO;
+                if (isPointer) {
+                    tipoVar = TipoVariavel.PONTEIRO_INTEIRO;
+                } else {
+                    tipoVar = TipoVariavel.INTEIRO;
+                }
                 break;
             case "real":
-                tipoVar = TipoVariavel.REAL;
+                if (isPointer) {
+                    tipoVar = TipoVariavel.PONTEIRO_REAL;
+                } else {
+                    tipoVar = TipoVariavel.REAL;
+                }
                 break;
             case "logico":
-                tipoVar = TipoVariavel.LOGICO;
+                if (isPointer) {
+                    tipoVar = TipoVariavel.PONTEIRO_LOGICO;
+                } else {
+                    tipoVar = TipoVariavel.LOGICO;
+                }
                 break;
             default:
                 break;

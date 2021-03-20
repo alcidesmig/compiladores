@@ -73,7 +73,7 @@ public class SemanticoVisitor extends PiaBaseVisitor<Void> {
                             resp.add(SemanticoUtils.verificarTipo(param.tipo_estendido().tipo_basico_ident().tipo_basico().getText(), false));
                         }
                         if (param.tipo_estendido().tipo_basico_ident().IDENT() != null) {
-                            resp.add(TipoVariavel.REGISTRO);
+                            resp.add(TipoVariavel.TIPO);
                         }
                     }
                 }
@@ -318,8 +318,7 @@ public class SemanticoVisitor extends PiaBaseVisitor<Void> {
                     // caso exista, continua com as declarações
                     // salvando os parâmetros no escopo
                     for (br.ufscar.dc.compiladores.semantico.PiaParser.IdentificadorContext identificadorContext : ctx.identificador()) {
-                        // #fix tipo
-                        etd.tipoEntrada = TipoEntradaTds.REGISTRO;
+                        etd.tipoEntrada = TipoEntradaTds.TIPO;
                         escoposAninhados.obterEscopoAtual().adicionar(identificadorContext.ident1.getText(), etd);
                     }
                 }
@@ -477,14 +476,13 @@ public class SemanticoVisitor extends PiaBaseVisitor<Void> {
                     }
                 } else {
                     // se existir, adiciona as variáveis no escopo com o tipo inferido
-                    // #fix
                     for (br.ufscar.dc.compiladores.semantico.PiaParser.IdentificadorContext identificadorContext : ctx.identificador()) {
                         // verifica se o identificador da variável já não foi utilizado
                         if (escoposAninhados.obterEscopoAtual().verificar(identificadorContext.getText()) != null) {
                             SemanticoUtils.adicionarErroSemantico(ctx.getStart(), "identificador " + identificadorContext.ident1.getText() + " ja declarado anteriormente");
                         } else {
-                            etd.tipoEntrada = TipoEntradaTds.REGISTRO;
-                            etd.tipoObjeto = TipoVariavel.REGISTRO;
+                            etd.tipoEntrada = TipoEntradaTds.TIPO;
+                            etd.tipoObjeto = TipoVariavel.TIPO;
                             escoposAninhados.obterEscopoAtual().adicionar(identificadorContext.ident1.getText(), etd);
                         }
                     }

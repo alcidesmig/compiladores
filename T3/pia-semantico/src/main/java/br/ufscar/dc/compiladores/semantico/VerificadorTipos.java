@@ -144,7 +144,8 @@ public class VerificadorTipos {
                 if (escopo.verificar(ctx.identificador().ident1.getText()) != null) {
                     // verifica se o tipo do identificador mais a esquerda no escopo não é um registro
                     // se não for um registro, é uma variável
-                    if (escopo.verificar(ctx.identificador().ident1.getText()).tipoEntrada != TabelaDeSimbolos.TipoEntradaTds.REGISTRO) {
+                    // para verificar se não é um registro, também é preciso verificar se não é um tipo que aponta para um registro
+                    if (escopo.verificar(ctx.identificador().ident1.getText()).tipoEntrada != TabelaDeSimbolos.TipoEntradaTds.REGISTRO && escopo.verificar(ctx.identificador().ident1.getText()).subTabela == null) {
                         return escopo.verificar(ctx.identificador().ident1.getText()).tipoObjeto;
                     } else {
                         // se o identificador mais a esquerda for um registro
@@ -152,12 +153,12 @@ public class VerificadorTipos {
                         // se for um campo dentro do um registro, pega o tipo desse campo
                         if (ctx.identificador().subIdent.size() > 0) {
                             // #todo recursão em registro dentro de registro
+
                             return tds.verificar(
                                     ctx.identificador().subIdent.get(ctx.identificador().subIdent.size() - 1).getText()
                             ).tipoObjeto;
                         }
                         // se não, retorna que é um registro
-                        // #fix
                         return escopo.verificar(ctx.identificador().ident1.getText()).tipoObjeto;
                     }
                 }
@@ -167,6 +168,7 @@ public class VerificadorTipos {
             // se for função, retorna o tipo de retorno da função
             for (TabelaDeSimbolos escopo : escoposAninhados.percorrerEscoposAninhados()) {
                 if (escopo.verificar(ctx.IDENT().getText()) != null) {
+
                     return escopo.verificar(ctx.IDENT().getText()).tipoObjeto;
                 }
             }

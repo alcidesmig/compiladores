@@ -10,9 +10,9 @@ Antes de tudo, é necessário baixar o projeto e configurá-lo. Pode-se fazer o 
 ```git
 git clone repo
 ```
-Após isso, entre na pasta do T2 digitando:
+Após isso, entre na pasta da parte semântica do T3 digitando:
 ```bash
-cd T3/semantic
+cd semantic
 ```
 
 Para fazer o build e run do projeto, pode-se utilizar o Makefile disponibilizado. Para isso, é necessário atualizar algumas variáveis dentro do arquivo "Makefile" de acordo com as especificações abaixo:

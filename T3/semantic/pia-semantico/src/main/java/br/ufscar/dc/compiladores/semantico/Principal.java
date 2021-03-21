@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Token;
 
 public class Principal {
@@ -18,6 +19,7 @@ public class Principal {
     static FileWriter f;
     static CommonTokenStream tokens;
     static PrintWriter pw;
+    static SemanticoVisitor as;
 
     public static void main(String args[]) throws IOException {
         // Inicia o PrintWriter para escrever o output no arquivo passado como parâmetro
@@ -25,51 +27,63 @@ public class Principal {
         pw = new PrintWriter(new File(args[1]));
 
         // Executa lexer e, se tudo estiver correto na parte léxica, executa o parser sintático
-        lexer(args[0]);
-        parser(args[0]);
-        cs = CharStreams.fromFileName(args[0]);
-        PiaLexer lexer = new PiaLexer(cs);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        PiaParser parser = new PiaParser(tokens);
-        ProgramaContext arvore = parser.programa();
-        SemanticoVisitor as = new SemanticoVisitor();
-        as.visitPrograma(arvore);
-        SemanticoUtils.errosSemanticos.forEach((s) -> pw.write(s + "\n"));
-        pw.write("Fim da compilacao\n");
-//            if (SemanticoUtils.errosSemanticos.isEmpty()) {
-        //                AlgumaGeradorC agc = new AlgumaGeradorC();;
-        //                agc.visitPrograma(arvore);
-        //                try (PrintWriter pw = new PrintWriter(args[1])) {
-        //                    pw.print(agc.saida.toString());
-        //                }
-        //            }
-        //        }
-        // Fecha arquivo de output
-        pw.close();
-
+        // se passar pelos dois, executa o analisador semântico
+        if (lexer(args[0]) && parser(args[0])) {
+            semantic(args[0]);
+        }
     }
 
-    static void parser(String file) throws IOException {
-        // Inicia o CharStream novamente
-        cs = CharStreams.fromFileName(file);
-        // Instancia o Lexer gerado pelo ANTLR
-        lex = new PiaLexer(cs);
-        // Cria o CommonTokenStream
-        tokens = new CommonTokenStream(lex);
-        // Instancia o Parser gerado pelo ANTLR
-        PiaParser parser = new PiaParser(tokens);
-        // Instancia o error listener
-        ErrorListener mcel = new ErrorListener(pw);
-        // Remove o error listener default
-        parser.removeErrorListeners();
-        // Attach do error listener no parser
-        parser.addErrorListener(mcel);
-        // Execute o parser (sintático)
+    static boolean semantic(String file) throws IOException {
         try {
+            // Inicia o CharStream novamente
+            cs = CharStreams.fromFileName(file);
+            // Instancia o Lexer gerado pelo ANTLR
+            lex = new PiaLexer(cs);
+            // Cria o CommonTokenStream
+            tokens = new CommonTokenStream(lex);
+            // Instancia o Parser gerado pelo ANTLR
+            PiaParser parser = new PiaParser(tokens);
+            // Resgata arvore semântica
+            ProgramaContext arvore = parser.programa();
+            // Instância o visitor
+            as = new SemanticoVisitor();
+            // Visita a árvore de forma recursiva
+            as.visitPrograma(arvore);
+            // Imprime os erros no arquivo de output
+            SemanticoUtils.errosSemanticos.forEach((s) -> pw.write(s + "\n"));
+            // Imprime fim da compilação
+            pw.write("Fim da compilacao\n");
+            // Fecha o arquivo de output
+            pw.close();
+            return true;
+        } catch (IOException | RecognitionException e) {
+            return false;
+        }
+    }
+
+    static boolean parser(String file) throws IOException {
+        try {
+            // Inicia o CharStream novamente
+            cs = CharStreams.fromFileName(file);
+            // Instancia o Lexer gerado pelo ANTLR
+            lex = new PiaLexer(cs);
+            // Cria o CommonTokenStream
+            tokens = new CommonTokenStream(lex);
+            // Instancia o Parser gerado pelo ANTLR
+            PiaParser parser = new PiaParser(tokens);
+            // Instancia o error listener
+            ErrorListener mcel = new ErrorListener(pw);
+            // Remove o error listener default
+            parser.removeErrorListeners();
+            // Attach do error listener no parser
+            parser.addErrorListener(mcel);
+            // Execute o parser (sintático)
             parser.programa();
+            return true;
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+        return false;
 
     }
 

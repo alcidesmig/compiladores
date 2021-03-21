@@ -14,10 +14,6 @@ Antes de tudo, é necessário baixar o projeto e configurá-lo. Pode-se fazer o 
 ```git
 git clone repo
 ```
-Após isso, entre na pasta do T1 digitando:
-```bash
-cd T1
-```
 
 Para fazer o build e run do projeto, pode-se utilizar o Makefile disponibilizado. Para isso, é necessário atualizar algumas variáveis dentro do arquivo "Makefile" de acordo com as especificações abaixo:
 

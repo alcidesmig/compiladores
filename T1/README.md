@@ -12,8 +12,17 @@ Para rodar o trabalho são necessários seguir os passos de "clone", "build" e "
 
 Antes de tudo, é necessário baixar o projeto e configurá-lo. Pode-se fazer o clone do repositório do github rodando:
 ```git
-git clone repo
+git clone https://github.com/alcidesmig/compiladores/
 ```
+
+### Pastas
+
+Navegue até a pasta atual utilizando
+```bash
+cd compiladores/T1
+```
+
+### Build
 
 Para fazer o build e run do projeto, pode-se utilizar o Makefile disponibilizado. Para isso, é necessário atualizar algumas variáveis dentro do arquivo "Makefile" de acordo com as especificações abaixo:
 
@@ -26,10 +35,7 @@ Para fazer o build e run do projeto, pode-se utilizar o Makefile disponibilizado
 - `MAVEN`: _path_ para o binário do maven. `DEFAULT: /usr/lib/netbeans/java/maven/bin/mvn`
 	- Versão utilizada: `Apache Maven 3.6.3`
 
-### Build
-
 Após configuradas as variáveis, pode-se fazer o build do projeto pelo terminal, digitando:
-
 
 ```
 make build

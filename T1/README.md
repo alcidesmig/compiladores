@@ -41,6 +41,8 @@ Após configuradas as variáveis, pode-se fazer o build do projeto pelo terminal
 make build
 ```
 
+Obs: caso seja necessário, pode-se utilizar o código executável presente na pasta `bin`, na raiz do projeto.
+
 ### Run
 
 Por fim, pode-se rodar os testes utilizando

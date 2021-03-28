@@ -20,6 +20,8 @@ cd compiladores/T2
 
 ### Build
 
+Caso seja necessário, pode-se utilizar o código executável presente na pasta `bin`, na raiz do projeto.
+
 Para fazer o build e run do projeto, pode-se utilizar o Makefile disponibilizado. Para isso, é necessário atualizar algumas variáveis dentro do arquivo "Makefile" de acordo com as especificações abaixo:
 
 - `AGENT`: _path_ do corretor. `DEFAULT: agent.jar`
@@ -36,6 +38,8 @@ Após configuradas as variáveis, pode-se fazer o build do projeto pelo terminal
 ```
 make build
 ```
+
+Obs: caso seja necessário, pode-se utilizar o código executável presente na pasta `bin`, na raiz do projeto.
 
 ### Run
 

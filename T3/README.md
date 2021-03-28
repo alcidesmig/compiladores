@@ -136,8 +136,8 @@ Resultado verificado
 Nota do grupo "760479,758606":
 CT Léxico = 0.0 (0/0)
 CT Sintático = 0.0 (0/0)
-CT Sintático = 0.0 (0/0)
-CT Semântico = 10.0 (18/18)
+CT Semântico = 0.0 (0/0)
+CT Gerador = 10.0 (20/20)
 ==================================
 ```
 

@@ -1,3 +1,5 @@
 T1/pia-lexico/target/
 T2/pia-sintatico/target/
 /T3/semantic/pia-semantico/target/
+/T3/code-builder/pia-semantico/target/
+/T3/code-builder/pia-code-builder/target/
